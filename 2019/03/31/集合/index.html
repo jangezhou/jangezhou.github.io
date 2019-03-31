@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="集合ArrayList集合集合   很多数据的一个集合，长度可以任意改变，类型随便 数组   长度不可变、类型单一 实例化一个集合对象：1using System.Collections; //ArrayList的引用命名空间 1ArrayList list = new ArrayList(); 获取对象，向集合里添加数据：12list.Add();     //括号内放的是object类的对象，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合">
+<meta property="og:url" content="http://jangezhou.github.com/2019/03/31/集合/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集合ArrayList集合集合   很多数据的一个集合，长度可以任意改变，类型随便 数组   长度不可变、类型单一 实例化一个集合对象：1using System.Collections; //ArrayList的引用命名空间 1ArrayList list = new ArrayList(); 获取对象，向集合里添加数据：12list.Add();     //括号内放的是object类的对象，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-31T11:17:56.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集合">
+<meta name="twitter:description" content="集合ArrayList集合集合   很多数据的一个集合，长度可以任意改变，类型随便 数组   长度不可变、类型单一 实例化一个集合对象：1using System.Collections; //ArrayList的引用命名空间 1ArrayList list = new ArrayList(); 获取对象，向集合里添加数据：12list.Add();     //括号内放的是object类的对象，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jangezhou.github.com/2019/03/31/集合/">
+
+
+
+
+
+  <title>集合 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jangezhou.github.com/2019/03/31/集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jangezhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T19:16:24+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/31/集合/" class="leancloud_visitors" data-flag-title="集合">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="ArrayList集合"><a href="#ArrayList集合" class="headerlink" title="ArrayList集合"></a>ArrayList集合</h2><h5 id="集合-1"><a href="#集合-1" class="headerlink" title="集合"></a>集合</h5><p>   很多数据的一个集合，长度可以任意改变，类型随便</p>
+<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><p>   长度不可变、类型单一</p>
+<h5 id="实例化一个集合对象："><a href="#实例化一个集合对象：" class="headerlink" title="实例化一个集合对象："></a>实例化一个集合对象：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections; //ArrayList的引用命名空间</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList list = new ArrayList();</span><br></pre></td></tr></table></figure>
+<h5 id="获取对象，向集合里添加数据："><a href="#获取对象，向集合里添加数据：" class="headerlink" title="获取对象，向集合里添加数据："></a>获取对象，向集合里添加数据：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.Add();     //括号内放的是object类的对象，即可以任意放数据，Add一般用于单个数据的添加</span><br><span class="line">list.AddRange();//AddRange用于数组、集合数据的添加</span><br></pre></td></tr></table></figure>
+<h5 id="集合获取长度："><a href="#集合获取长度：" class="headerlink" title="集合获取长度："></a>集合获取长度：</h5><p>   每次集合中实际包含的元素个数(count)超过可以包含的元素个数(capcity)的时候，集合就会向内存中申请一倍的空间，来保证集合的长度一直够用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.Count; //表示这个集合中实际包含的元素个数</span><br><span class="line">list.capcity; //表示这个集合可以包含的元素的个数</span><br></pre></td></tr></table></figure>
+<p> 我们将一个对象输出到控制台，默认情况下，打印的就是这个对象所在类的命名空间</p>
+<h5 id="清除所有元素："><a href="#清除所有元素：" class="headerlink" title="清除所有元素："></a>清除所有元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Clear();</span><br></pre></td></tr></table></figure>
+<h5 id="删除单个元素："><a href="#删除单个元素：" class="headerlink" title="删除单个元素："></a>删除单个元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Remove();  //删除单个元素，写谁就删谁</span><br></pre></td></tr></table></figure>
+<h5 id="根据下标去删除元素："><a href="#根据下标去删除元素：" class="headerlink" title="根据下标去删除元素："></a>根据下标去删除元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.RemoveAt();</span><br></pre></td></tr></table></figure>
+<h5 id="根据下标去移除一定范围的元素："><a href="#根据下标去移除一定范围的元素：" class="headerlink" title="根据下标去移除一定范围的元素："></a>根据下标去移除一定范围的元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.RemoveRange(0,3); //比如我要删除从0位置开始，到3位置的集合</span><br></pre></td></tr></table></figure>
+<h5 id="升序排列："><a href="#升序排列：" class="headerlink" title="升序排列："></a>升序排列：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Sort();  //升序一组数据，需要类型大致相同</span><br></pre></td></tr></table></figure>
+<h5 id="反转："><a href="#反转：" class="headerlink" title="反转："></a>反转：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Reverse();</span><br></pre></td></tr></table></figure>
+<h5 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.Insert(1,&quot;你好&quot;);  //在集合上1位置插入你好,在指定的位置插入一个元素</span><br><span class="line">list.InsertRange(0，new string[] &#123;&quot;jack&quot;,&quot;ben&quot;&#125;);//在指定的位置插入一个集合</span><br></pre></td></tr></table></figure>
+<h5 id="判断是否包含："><a href="#判断是否包含：" class="headerlink" title="判断是否包含："></a>判断是否包含：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool b = list.Contains(); //判断是否包含某个元素，如果有返回bool值</span><br></pre></td></tr></table></figure>
+<h2 id="Hastable集合"><a href="#Hastable集合" class="headerlink" title="Hastable集合"></a>Hastable集合</h2><h5 id="Hastable"><a href="#Hastable" class="headerlink" title="Hastable"></a>Hastable</h5><p>   键值对集合，在Hastable中是根据键去查找   字典   比如要查找“孙”  在字典根据拼音查找sun—孙</p>
+<h5 id="实例化对象："><a href="#实例化对象：" class="headerlink" title="实例化对象："></a>实例化对象：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;  //Hastable引用命名空间</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hastable ht = new Hastable();</span><br></pre></td></tr></table></figure>
+<h5 id="获取对象，向集合里添加数据：-1"><a href="#获取对象，向集合里添加数据：-1" class="headerlink" title="获取对象，向集合里添加数据："></a>获取对象，向集合里添加数据：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ht.Add();  //括号里放的是object类型，且需要输入键key和值value</span><br><span class="line">ht[1]=&quot;jack&quot;;  //中括号里的是索引值，即在集合1的位置添加jack，如果1位置有了数据，那么就直接替换掉，否则就添加进去</span><br></pre></td></tr></table></figure>
+<h5 id="集合获取长度：-1"><a href="#集合获取长度：-1" class="headerlink" title="集合获取长度："></a>集合获取长度：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht.Count;</span><br></pre></td></tr></table></figure>
+<p>在键值对集合中，是根据键去找值的：</p>
+<h5 id="foreach循环："><a href="#foreach循环：" class="headerlink" title="foreach循环："></a>foreach循环：</h5><h6 id="var推断类型："><a href="#var推断类型：" class="headerlink" title="var推断类型："></a>var推断类型：</h6><p>​      c#：是一门强类型语言：在代码当中，必须对每一个变量的类型有一个明确的定义</p>
+<p>​      js：是一门弱语言，在代码当中，不需要对每一个变量的类型有一个明确的定义</p>
+<p>​      var：不需要对每一个变量的类型有一个明确的定义，属于弱类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foreach (var item in collection) //item每一项，in在...里面，collection集合，var推断类型</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">//var在集合当中推断item的类型，item代表循环的集合当中的每一项，in在...里面，collection表示你要循环的集合</span><br></pre></td></tr></table></figure>
+<h6 id="Hastable集合foreach遍历："><a href="#Hastable集合foreach遍历：" class="headerlink" title="Hastable集合foreach遍历："></a>Hastable集合foreach遍历：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foreach (var item in ht.Keys)//遍历集合里的键，那么item就是键，如果是ht.Values,遍历的就是集合的值，那么item是值</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="判断是否包含：-1"><a href="#判断是否包含：-1" class="headerlink" title="判断是否包含："></a>判断是否包含：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ht.Contains  //是否包含了键</span><br><span class="line">ht.ContainsKey  //是否包含了键</span><br><span class="line">he.ContainsValue //是否包含了值</span><br></pre></td></tr></table></figure>
+<h5 id="清除所有元素：-1"><a href="#清除所有元素：-1" class="headerlink" title="清除所有元素："></a>清除所有元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht.Clear();</span><br></pre></td></tr></table></figure>
+<h5 id="根据键值删除元素："><a href="#根据键值删除元素：" class="headerlink" title="根据键值删除元素："></a>根据键值删除元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht.Remove();</span><br></pre></td></tr></table></figure>
+<h2 id="List泛型集合"><a href="#List泛型集合" class="headerlink" title="List泛型集合"></a>List泛型集合</h2><p>   ArrayList集合虽然长度可变，数据可以任意存放，但是在取数据的时候都是object，需要转换类型才能使用。为了解决这个问题，用了更加方便的集合—List泛型集合。</p>
+<p>​    List集合对元素的类型已经有了明确的定义</p>
+<h5 id="创建泛型集合对象："><a href="#创建泛型集合对象：" class="headerlink" title="创建泛型集合对象："></a>创建泛型集合对象：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections.Generic;  //List泛型集合的命名空间</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;T&gt; list = new List&lt;T&gt;();    //尖括号的T是Type(类型)</span><br></pre></td></tr></table></figure>
+<h5 id="获取对象，向集合里添加数据：-2"><a href="#获取对象，向集合里添加数据：-2" class="headerlink" title="获取对象，向集合里添加数据："></a>获取对象，向集合里添加数据：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;int&gt; list = new List&lt;int&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.Add();     //Add一般用于单个数据的添加</span><br><span class="line">list.AddRange();//AddRange用于数组、集合数据的添加</span><br></pre></td></tr></table></figure>
+<h5 id="集合获取长度：-2"><a href="#集合获取长度：-2" class="headerlink" title="集合获取长度："></a>集合获取长度：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Count;</span><br></pre></td></tr></table></figure>
+<h5 id="清除所有元素：-2"><a href="#清除所有元素：-2" class="headerlink" title="清除所有元素："></a>清除所有元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Clear();</span><br></pre></td></tr></table></figure>
+<h5 id="删除单个元素：-1"><a href="#删除单个元素：-1" class="headerlink" title="删除单个元素："></a>删除单个元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.Remove();  //删除单个元素，写谁就删谁</span><br></pre></td></tr></table></figure>
+<h5 id="根据下标去删除元素：-1"><a href="#根据下标去删除元素：-1" class="headerlink" title="根据下标去删除元素："></a>根据下标去删除元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.RemoveAt();</span><br></pre></td></tr></table></figure>
+<h5 id="根据下标去移除一定范围的元素：-1"><a href="#根据下标去移除一定范围的元素：-1" class="headerlink" title="根据下标去移除一定范围的元素："></a>根据下标去移除一定范围的元素：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.RemoveRange(0,3); //比如我要删除从0位置开始，到3位置的集合</span><br></pre></td></tr></table></figure>
+<h5 id="插入：-1"><a href="#插入：-1" class="headerlink" title="插入："></a>插入：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.Insert(1,&quot;你好&quot;);  //在集合上1位置插入你好,在指定的位置插入一个元素</span><br><span class="line">list.InsertRange(0，new string[] &#123;&quot;jack&quot;,&quot;ben&quot;&#125;);//在指定的位置插入一个集合</span><br></pre></td></tr></table></figure>
+<h5 id="List泛型集合可以转换为一个数组"><a href="#List泛型集合可以转换为一个数组" class="headerlink" title="List泛型集合可以转换为一个数组:"></a>List泛型集合可以转换为一个数组:</h5><p>   转换成什么样的数组，取决于你是什么样的集合—既集合的类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// List泛型集合可以转换为一个数组</span><br><span class="line"> List&lt;string&gt; str = new List&lt;string&gt;();</span><br><span class="line"> str.AddRange(new string[] &#123; &quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot; &#125;);</span><br><span class="line">//str.Toarry将泛型集合转换成数组，并返回的是string类型的数组</span><br><span class="line"> string[] str1 = str.ToArray();</span><br><span class="line">//因为str1是char类型，要获取长度就用str1.Length</span><br><span class="line"> for (int i = 0; i &lt; str1.Length; i++)</span><br><span class="line"> &#123;</span><br><span class="line">     Console.Write(str1[i]);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="将数组类型转换成List泛型集合"><a href="#将数组类型转换成List泛型集合" class="headerlink" title="将数组类型转换成List泛型集合"></a>将数组类型转换成List泛型集合</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       //实例化一个char类型的对象，</span><br><span class="line">char[] s =new char[]&#123; &apos;c&apos;,&apos;d&apos;,&apos;e&apos; &#125;;</span><br><span class="line">      //str.ToList将泛型集合转换成数组，并返回的是char类型的泛型集合 </span><br><span class="line">       List&lt;char&gt; listChar = s.ToList();</span><br><span class="line">       for (int i = 0; i &lt;listChar.Count; i++)</span><br><span class="line">       &#123;</span><br><span class="line">           Console.WriteLine(listChar[i]);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h2><h5 id="装箱"><a href="#装箱" class="headerlink" title="装箱"></a>装箱</h5><p>   就是将值类型转换为引用类型</p>
+<h5 id="拆箱"><a href="#拆箱" class="headerlink" title="拆箱"></a>拆箱</h5><p>   将引用类型转换为值类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int n = 10;  //n为int类型，o为objec类型</span><br><span class="line">object o = n;  //int类型为值类型，obje类型为引用类型，将值类型转换成给引用类型，这种方法叫做装箱</span><br><span class="line"></span><br><span class="line">int nn = (int)o; //把引用类型的o强转成了值类型的nn，这种方法叫做拆箱</span><br></pre></td></tr></table></figure>
+<p>   计数器命名空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using System.Diagnostics;// 命名空间提供类，使您能够与系统进程、事件日志和性能计数器进行交互。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//测试ArrayList集合和泛型集合List&lt;int&gt;的循环时间</span><br><span class="line"> sw.Start();  //计数器</span><br><span class="line"> //ArrayList list = new ArrayList();  //因为ArrayList传回的是objec类型，而i为int类型，所以为装箱操作</span><br><span class="line"> List&lt;int&gt; list = new List&lt;int&gt;();  //***记住一定要有括号，因为泛型集合为int型，而i也是int类型，所以不是装箱</span><br><span class="line"> //这个循环进行了装箱一千万次装箱</span><br><span class="line"> for (int i = 0; i &lt; 10000000; i++)</span><br><span class="line"> &#123;</span><br><span class="line">     //将值类型转换成给引用类型，装箱</span><br><span class="line">     list.Add(i);</span><br><span class="line"> &#125;</span><br><span class="line"> //计数器</span><br><span class="line"> sw.Stop();</span><br><span class="line"> Console.WriteLine(sw.Elapsed);</span><br><span class="line"> Console.ReadKey();</span><br></pre></td></tr></table></figure>
+<p>   看两种类型是否发生可装箱和拆箱，要看这两种类型是否存在继承关系，有继承关系才有可能有装箱和拆箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这个地方没有发生任意类型的装箱或者拆箱</span><br><span class="line">string str = &quot;123&quot;;</span><br><span class="line">int n = Convert.ToInt32(str);</span><br><span class="line">Console.WriteLine(n);</span><br></pre></td></tr></table></figure>
+<h2 id="Dictionary键值对集合"><a href="#Dictionary键值对集合" class="headerlink" title="Dictionary键值对集合"></a>Dictionary键值对集合</h2><p>   Dictionary键值对集合和Hastale有点像，都是通过唯一的键去找值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Dictionary&lt;int, string&gt; dic = new Dictionary&lt;int, string&gt;();</span><br><span class="line">            dic.Add(1, &quot;jack&quot;);</span><br><span class="line">            dic.Add(2, &quot;ben&quot;);</span><br><span class="line">            dic.Add(3, &quot;lucy&quot;);</span><br><span class="line">            dic[1] = &quot;新来的&quot;;</span><br><span class="line"> 		   //下面是比较洋气的遍历方式，通过键值对KeyValuePair&lt;TKey,TValue&gt;对键值对集合的元素一对一对的去遍历</span><br><span class="line">            foreach (KeyValuePair&lt;int,string&gt; kv in dic)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(&quot;&#123;0&#125;----&#123;1&#125;&quot;, kv.Key, kv.Value);</span><br><span class="line">            &#125;</span><br><span class="line">		    //下面是常规的遍历，通过键去找值</span><br><span class="line">            //foreach (var item in dic.Keys)</span><br><span class="line">            //&#123;</span><br><span class="line">            //    Console.WriteLine(&quot;&#123;0&#125;----&#123;1&#125;&quot;, item, dic[item]);</span><br><span class="line">            //&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/26/Socket网络编程/" rel="next" title="Socket网络编程">
+                <i class="fa fa-chevron-left"></i> Socket网络编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jangezhou">
+            
+              <p class="site-author-name" itemprop="name">Jangezhou</p>
+              <p class="site-description motion-element" itemprop="description">Music & Code</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=399341475&auto=0&height=66"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#集合"><span class="nav-number">1.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList集合"><span class="nav-number">1.1.</span> <span class="nav-text">ArrayList集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#集合-1"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例化一个集合对象："><span class="nav-number">1.1.0.0.3.</span> <span class="nav-text">实例化一个集合对象：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取对象，向集合里添加数据："><span class="nav-number">1.1.0.0.4.</span> <span class="nav-text">获取对象，向集合里添加数据：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集合获取长度："><span class="nav-number">1.1.0.0.5.</span> <span class="nav-text">集合获取长度：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除所有元素："><span class="nav-number">1.1.0.0.6.</span> <span class="nav-text">清除所有元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除单个元素："><span class="nav-number">1.1.0.0.7.</span> <span class="nav-text">删除单个元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据下标去删除元素："><span class="nav-number">1.1.0.0.8.</span> <span class="nav-text">根据下标去删除元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据下标去移除一定范围的元素："><span class="nav-number">1.1.0.0.9.</span> <span class="nav-text">根据下标去移除一定范围的元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#升序排列："><span class="nav-number">1.1.0.0.10.</span> <span class="nav-text">升序排列：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#反转："><span class="nav-number">1.1.0.0.11.</span> <span class="nav-text">反转：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入："><span class="nav-number">1.1.0.0.12.</span> <span class="nav-text">插入：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断是否包含："><span class="nav-number">1.1.0.0.13.</span> <span class="nav-text">判断是否包含：</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Hastable集合"><span class="nav-number">1.2.</span> <span class="nav-text">Hastable集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hastable"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">Hastable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例化对象："><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">实例化对象：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取对象，向集合里添加数据：-1"><span class="nav-number">1.2.0.0.3.</span> <span class="nav-text">获取对象，向集合里添加数据：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集合获取长度：-1"><span class="nav-number">1.2.0.0.4.</span> <span class="nav-text">集合获取长度：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#foreach循环："><span class="nav-number">1.2.0.0.5.</span> <span class="nav-text">foreach循环：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#var推断类型："><span class="nav-number">1.2.0.0.5.1.</span> <span class="nav-text">var推断类型：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Hastable集合foreach遍历："><span class="nav-number">1.2.0.0.5.2.</span> <span class="nav-text">Hastable集合foreach遍历：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断是否包含：-1"><span class="nav-number">1.2.0.0.6.</span> <span class="nav-text">判断是否包含：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除所有元素：-1"><span class="nav-number">1.2.0.0.7.</span> <span class="nav-text">清除所有元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据键值删除元素："><span class="nav-number">1.2.0.0.8.</span> <span class="nav-text">根据键值删除元素：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List泛型集合"><span class="nav-number">1.3.</span> <span class="nav-text">List泛型集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建泛型集合对象："><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">创建泛型集合对象：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取对象，向集合里添加数据：-2"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">获取对象，向集合里添加数据：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集合获取长度：-2"><span class="nav-number">1.3.0.0.3.</span> <span class="nav-text">集合获取长度：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除所有元素：-2"><span class="nav-number">1.3.0.0.4.</span> <span class="nav-text">清除所有元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除单个元素：-1"><span class="nav-number">1.3.0.0.5.</span> <span class="nav-text">删除单个元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据下标去删除元素：-1"><span class="nav-number">1.3.0.0.6.</span> <span class="nav-text">根据下标去删除元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据下标去移除一定范围的元素：-1"><span class="nav-number">1.3.0.0.7.</span> <span class="nav-text">根据下标去移除一定范围的元素：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入：-1"><span class="nav-number">1.3.0.0.8.</span> <span class="nav-text">插入：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#List泛型集合可以转换为一个数组"><span class="nav-number">1.3.0.0.9.</span> <span class="nav-text">List泛型集合可以转换为一个数组:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将数组类型转换成List泛型集合"><span class="nav-number">1.3.0.0.10.</span> <span class="nav-text">将数组类型转换成List泛型集合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装箱和拆箱"><span class="nav-number">1.4.</span> <span class="nav-text">装箱和拆箱</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#装箱"><span class="nav-number">1.4.0.0.1.</span> <span class="nav-text">装箱</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拆箱"><span class="nav-number">1.4.0.0.2.</span> <span class="nav-text">拆箱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dictionary键值对集合"><span class="nav-number">1.5.</span> <span class="nav-text">Dictionary键值对集合</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jangezhou</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> ��������
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      �˴�
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> �ܷ�����
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      ��
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Mgov27EcVg1gs8FT35lQURLO-9Nh9j0Va", "8W9W4r4djcCYJdYpm3GU2bRO");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
