@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件流FileStreamFileStream和File的区别   File在读取文件的时候，是把整个文件的数据都读出来，对内存伤害很大    FileStream在读取文件的时候，是一点一点的去读取文件的数据，对内存的伤害很小 FileStream   操作字节的，能够操作任何类型的文件，因为所有的文件都字节的形式来存储 StreamReader和StreamWriter   操作字符的(字符是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件流">
+<meta property="og:url" content="http://jangezhou.github.com/2019/04/01/文件流/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文件流FileStreamFileStream和File的区别   File在读取文件的时候，是把整个文件的数据都读出来，对内存伤害很大    FileStream在读取文件的时候，是一点一点的去读取文件的数据，对内存的伤害很小 FileStream   操作字节的，能够操作任何类型的文件，因为所有的文件都字节的形式来存储 StreamReader和StreamWriter   操作字符的(字符是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-01T01:57:27.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件流">
+<meta name="twitter:description" content="文件流FileStreamFileStream和File的区别   File在读取文件的时候，是把整个文件的数据都读出来，对内存伤害很大    FileStream在读取文件的时候，是一点一点的去读取文件的数据，对内存的伤害很小 FileStream   操作字节的，能够操作任何类型的文件，因为所有的文件都字节的形式来存储 StreamReader和StreamWriter   操作字符的(字符是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jangezhou.github.com/2019/04/01/文件流/">
+
+
+
+
+
+  <title>文件流 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jangezhou.github.com/2019/04/01/文件流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jangezhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件流</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T09:57:09+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/01/文件流/" class="leancloud_visitors" data-flag-title="文件流">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件流"><a href="#文件流" class="headerlink" title="文件流"></a>文件流</h1><h2 id="FileStream"><a href="#FileStream" class="headerlink" title="FileStream"></a>FileStream</h2><h5 id="FileStream和File的区别"><a href="#FileStream和File的区别" class="headerlink" title="FileStream和File的区别"></a>FileStream和File的区别</h5><p>   File在读取文件的时候，是把整个文件的数据都读出来，对内存伤害很大</p>
+<p>   FileStream在读取文件的时候，是一点一点的去读取文件的数据，对内存的伤害很小</p>
+<h5 id="FileStream-1"><a href="#FileStream-1" class="headerlink" title="FileStream"></a>FileStream</h5><p>   操作字节的，能够操作任何类型的文件，因为所有的文件都字节的形式来存储</p>
+<h5 id="StreamReader和StreamWriter"><a href="#StreamReader和StreamWriter" class="headerlink" title="StreamReader和StreamWriter"></a>StreamReader和StreamWriter</h5><p>   操作字符的(字符是个字符串)，只能操作文本文件</p>
+<p>   PS：这两个能够操作大文件，而File只能操作小文件</p>
+<h5 id="学习-net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。"><a href="#学习-net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。" class="headerlink" title="学习.net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。"></a>学习.net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。</h5><hr>
+<h5 id="因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。"><a href="#因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。" class="headerlink" title="因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。"></a>因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//这就是using的一个框架，小括号里写创建对象的过程，大括号里写读取或者写入</span><br><span class="line">using()</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="FileStream的读"><a href="#FileStream的读" class="headerlink" title="FileStream的读"></a>FileStream的读</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//创建FileStream对象,第一个是针对你要读取的文件的路径，第二个指定系统打开文件的方式，对文件数据的操作，(即文件数据的权限:只读，只写，可读可写)</span><br><span class="line">            FileStream fsRead = new FileStream(@&quot;C:\Users\10270\Desktop\新建文本文档.md&quot;, FileMode.OpenOrCreate, FileAccess.Read);</span><br><span class="line">            //定义字节数组，且给定读取的字节大小---每次读取5M</span><br><span class="line">            byte[] buffer = new byte[1024 * 1024 * 5];</span><br><span class="line">            //如果文件只有3.8M，而我写的每次读取是5M，那么int r接收到的返回值，，就是本次实际读取到的有效字节数</span><br><span class="line">            //返回本次实际读取到的有效字节数</span><br><span class="line">            int r = fsRead.Read(buffer, 0, buffer.Length);//buffer读取的字节数组，0是从哪个位置开始读（从0位置开始读），最多读取的字节数</span><br><span class="line">            //将字节数组中每一个元素按照指定的编码格式解码成字符串</span><br><span class="line">            string str = Encoding.UTF8.GetString(buffer, 0, r);//因为读取的文件是766字节，而buffer每次读取的是5M，这样显示出来的多余的字节全部用空来代替了。所以因该读取的是766字节，0是从首位置开始读取，r是读取766字节</span><br><span class="line">            //关闭流</span><br><span class="line">            fsRead.Close();</span><br><span class="line">            //释放流占用的资源</span><br><span class="line">            fsRead.Dispose();</span><br><span class="line">            Console.WriteLine(str);</span><br></pre></td></tr></table></figure>
+<h5 id="FileStream的写"><a href="#FileStream的写" class="headerlink" title="FileStream的写"></a>FileStream的写</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。</span><br><span class="line">            using (FileStream fsWrite = new FileStream(@&quot;C:\Users\10270\Desktop\new.md&quot;, FileMode.OpenOrCreate, FileAccess.Write))</span><br><span class="line">            &#123;</span><br><span class="line">                string str = &quot;Hello,I am a boy&quot;;</span><br><span class="line">                byte[] buffer = Encoding.UTF8.GetBytes(str);  //将字节数组中每一个元素按照指定的编码格式解码成字符串</span><br><span class="line">                fsWrite.Write(buffer, 0, buffer.Length);   //buffer读取的字节数组，0是从哪个位置开始写（从0位置开始写），最多读取的字节数</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            Console.WriteLine(&quot;写入OK&quot;);</span><br></pre></td></tr></table></figure>
+<p>   在读和写的时候，解码的格式一定要是一样的，否则会乱码。</p>
+<h5 id="使用文件流来实现多媒体文件的复制"><a href="#使用文件流来实现多媒体文件的复制" class="headerlink" title="使用文件流来实现多媒体文件的复制"></a>使用文件流来实现多媒体文件的复制</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            //思路：就是先将要复制的多媒体文件读取出来，然后再写入到你指定的位置</span><br><span class="line">            //获取原路径</span><br><span class="line">            string source = @&quot;C:\Users\10270\Desktop\3、List泛型集合.wmv&quot;;</span><br><span class="line">            //复制的目标路径</span><br><span class="line">            string target = @&quot;C:\Users\10270\Desktop\new.wmv&quot;;</span><br><span class="line">            CopyFile(source, target);</span><br><span class="line">            Console.WriteLine(&quot;复制成功&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void CopyFile(string source, string target)</span><br><span class="line">        &#123;</span><br><span class="line">            //1、创建一个负责读取的流</span><br><span class="line">            using (FileStream fsRead = new FileStream(source, FileMode.OpenOrCreate, FileAccess.Read))</span><br><span class="line">            &#123;</span><br><span class="line">                //2、创建一个负责写入的流</span><br><span class="line">                using (FileStream fsWrite = new FileStream(target, FileMode.OpenOrCreate, FileAccess.Write))</span><br><span class="line">                &#123;</span><br><span class="line">                    byte[] buffer = new byte[1024 * 1024 * 5];</span><br><span class="line">                    //因为文件可能会比较大，所以我们在读取的时候，应该通过一个循环去读取</span><br><span class="line">                    //比如文件是34.9M,而你每次读取是5M，也就要读取7次，但是第7次读取实际是4.9M，所以必须通过一个循环去读取</span><br><span class="line">                    while (true)</span><br><span class="line">                    &#123;</span><br><span class="line">                        //返回本次读取实际读取到的字节数r</span><br><span class="line">                        int r = fsRead.Read(buffer, 0, buffer.Length);</span><br><span class="line">                        //如果返回一个0，也就意味着什么都没有读取到，读取完了</span><br><span class="line">                        if(r==0)</span><br><span class="line">                        &#123;</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        //调用写的方法，写入buffer，从0位置开始写，最多写入的字节数r</span><br><span class="line">                        fsWrite.Write(buffer, 0,r);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="StreamReader和StreamWriter-1"><a href="#StreamReader和StreamWriter-1" class="headerlink" title="StreamReader和StreamWriter"></a>StreamReader和StreamWriter</h2><h5 id="使用StreamReader来读取一个文本文件"><a href="#使用StreamReader来读取一个文本文件" class="headerlink" title="使用StreamReader来读取一个文本文件"></a>使用StreamReader来读取一个文本文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//StreamReader.StreamReader(string path,Encoding encoding),路径和转码</span><br><span class="line">using (StreamReader sr = new StreamReader(@&quot;C:\Users\10270\Desktop\新建文本文档.md&quot;, Encoding.Default))</span><br><span class="line">            &#123;</span><br><span class="line">                //EndOfStream：获取一个值，该值指示当前的流位置是否在流结尾，即是否读到了文件的结尾</span><br><span class="line">                while (!sr.EndOfStream)</span><br><span class="line">                &#123;</span><br><span class="line">                    Console.WriteLine(sr.ReadLine());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="使用StreamWriter来写入一个文本文件"><a href="#使用StreamWriter来写入一个文本文件" class="headerlink" title="使用StreamWriter来写入一个文本文件"></a>使用StreamWriter来写入一个文本文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//StreamWriter.StreamWriter(string path,bool append),路径和是否追加内容(即为添加的内容不覆盖之情的内容)</span><br><span class="line">using (StreamWriter sw = new StreamWriter(@&quot;C:\Users\10270\Desktop\new.md&quot;, true))</span><br><span class="line">            &#123;</span><br><span class="line">               </span><br><span class="line">                sw.Write(&quot;很高兴认识你&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            Console.WriteLine(&quot;OK&quot;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/类/" rel="next" title="类">
+                <i class="fa fa-chevron-left"></i> 类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jangezhou">
+            
+              <p class="site-author-name" itemprop="name">Jangezhou</p>
+              <p class="site-description motion-element" itemprop="description">Music & Code</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=399341475&auto=0&height=66"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件流"><span class="nav-number">1.</span> <span class="nav-text">文件流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileStream"><span class="nav-number">1.1.</span> <span class="nav-text">FileStream</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FileStream和File的区别"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">FileStream和File的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileStream-1"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">FileStream</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#StreamReader和StreamWriter"><span class="nav-number">1.1.0.0.3.</span> <span class="nav-text">StreamReader和StreamWriter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#学习-net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。"><span class="nav-number">1.1.0.0.4.</span> <span class="nav-text">学习.net就是学习他的类，静态类就直接调用方法，而非静态类就创建对象调用方法。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。"><span class="nav-number">1.1.0.0.5.</span> <span class="nav-text">因为FileStream文件流中，每次结尾都要写关闭和释放流的操作，所以给了一个新方法，不用去写这一过程。既将创建的文件流对象的过程写在using当中，会自动的帮助我们释放所占用的资源。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileStream的读"><span class="nav-number">1.1.0.0.6.</span> <span class="nav-text">FileStream的读</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileStream的写"><span class="nav-number">1.1.0.0.7.</span> <span class="nav-text">FileStream的写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用文件流来实现多媒体文件的复制"><span class="nav-number">1.1.0.0.8.</span> <span class="nav-text">使用文件流来实现多媒体文件的复制</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#StreamReader和StreamWriter-1"><span class="nav-number">1.2.</span> <span class="nav-text">StreamReader和StreamWriter</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用StreamReader来读取一个文本文件"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">使用StreamReader来读取一个文本文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用StreamWriter来写入一个文本文件"><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">使用StreamWriter来写入一个文本文件</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jangezhou</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> ��������
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      �˴�
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> �ܷ�����
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      ��
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Mgov27EcVg1gs8FT35lQURLO-9Nh9j0Va", "8W9W4r4djcCYJdYpm3GU2bRO");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
